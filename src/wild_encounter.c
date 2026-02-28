@@ -183,40 +183,326 @@ static void FeebasSeedRng(u16 seed)
 // LAND_WILD_COUNT
 u32 ChooseWildMonIndex_Land(void)
 {
-    u8 wildMonIndex = 0;
-    bool8 swap = FALSE;
+  bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
-
-    if (rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_0)
-        wildMonIndex = 0;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_1)
-        wildMonIndex = 1;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_2)
-        wildMonIndex = 2;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_3)
-        wildMonIndex = 3;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_3 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_4)
-        wildMonIndex = 4;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_4 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_5)
-        wildMonIndex = 5;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_5 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_6)
-        wildMonIndex = 6;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_6 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_7)
-        wildMonIndex = 7;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_7 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_8)
-        wildMonIndex = 8;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
-        wildMonIndex = 9;
-    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_9 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_10)
-        wildMonIndex = 10;
-    else
-        wildMonIndex = 11;
 
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
+    static const u8 sLandThresholds[] = {
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_0)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_0,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_1)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_1,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_2)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_2,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_3)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_3,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_4)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_4,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_5)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_5,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_6)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_6,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_7)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_7,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_8)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_8,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_9,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_10)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_10,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_11)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_11,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_12)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_12,
+    #endif
+     #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_13)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_13,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_14)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_14,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_15)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_15,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_16)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_16,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_17)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_17,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_18)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_18,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_19)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_19,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_20)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_20,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_21)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_21,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_22)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_22,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_23)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_23,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_24)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_24,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_25)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_25,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_26)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_26,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_27)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_27,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_28)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_28,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_29)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_29,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_30)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_30,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_31)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_31,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_32)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_32,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_33)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_33,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_34)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_34,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_35)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_35,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_36)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_36,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_37)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_37,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_38)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_38,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_39)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_39,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_40)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_40,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_41)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_41,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_42)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_42,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_43)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_43,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_44)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_44,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_45)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_45,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_46)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_46,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_47)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_47,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_48)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_48,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_49)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_49,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_50)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_50,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_51)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_51,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_52)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_52,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_53)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_53,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_54)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_54,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_55)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_55,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_56)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_56,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_57)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_57,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_58)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_58,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_59)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_59,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_60)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_60,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_61)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_61,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_62)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_62,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_63)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_63,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_64)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_64,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_65)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_65,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_66)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_66,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_67)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_67,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_68)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_68,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_69)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_69,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_70)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_70,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_71)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_71,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_72)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_72,
+    #endif
+     #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_73)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_73,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_74)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_74,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_75)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_75,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_76)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_76,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_77)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_77,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_78)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_78,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_79)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_79,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_80)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_80,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_81)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_81,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_82)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_82,
+    #endif
+     #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_83)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_83,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_84)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_84,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_85)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_85,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_86)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_86,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_87)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_87,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_88)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_88,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_89)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_89,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_90)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_90,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_91)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_91,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_92)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_92,
+    #endif
+     #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_93)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_93,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_94)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_94,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_95)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_95,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_96)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_96,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_97)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_97,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_98)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_98,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_LAND_MONS_SLOT_99)
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_99,
+    #endif
+    // …lägg till fler #if-block om du tänker gå över 99 slots …
+    };
+
+    const u8 count = ARRAY_COUNT(sLandThresholds);
+    u8 wildMonIndex = 0;
+
+    for (u8 i = 0; i < count; i++)
+    {
+        if (rand < sLandThresholds[i]) { wildMonIndex = i; break; }
+    }
+
     if (swap)
-        wildMonIndex = 11 - wildMonIndex;
+        wildMonIndex = (count - 1) - wildMonIndex;
 
     return wildMonIndex;
 }
@@ -224,26 +510,56 @@ u32 ChooseWildMonIndex_Land(void)
 // WATER_WILD_COUNT
 u32 ChooseWildMonIndex_Water(void)
 {
-    u32 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
-
-    if (rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
-        wildMonIndex = 0;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_1)
-        wildMonIndex = 1;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_2)
-        wildMonIndex = 2;
-    else if (rand >= ENCOUNTER_CHANCE_WATER_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_WATER_MONS_SLOT_3)
-        wildMonIndex = 3;
-    else
-        wildMonIndex = 4;
 
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
+    static const u8 sWaterThresholds[] = {
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_0)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_0,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_1)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_2)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_2,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_3)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_3,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_4)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_4,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_5)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_5,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_6)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_6,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_7)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_7,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_8)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_8,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_9)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_9,
+    #endif
+    // …lägg till fler #if-block om du ökar slots i JSON…
+    };
+
+    const u8 count = ARRAY_COUNT(sWaterThresholds);
+    u8 wildMonIndex = 0;
+
+    for (u8 i = 0; i < count; i++)
+    {
+        if (rand < sWaterThresholds[i]) { wildMonIndex = i; break; }
+    }
+
     if (swap)
-        wildMonIndex = 4 - wildMonIndex;
+        wildMonIndex = (count - 1) - wildMonIndex;
 
     return wildMonIndex;
 }
@@ -251,26 +567,41 @@ u32 ChooseWildMonIndex_Water(void)
 // ROCK_WILD_COUNT
 u32 ChooseWildMonIndex_Rocks(void)
 {
-    u32 wildMonIndex = 0;
-    bool8 swap = FALSE;
+   bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_ROCK_SMASH_MONS_TOTAL;
-
-    if (rand < ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0)
-        wildMonIndex = 0;
-    else if (rand >= ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1)
-        wildMonIndex = 1;
-    else if (rand >= ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1 && rand < ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2)
-        wildMonIndex = 2;
-    else if (rand >= ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2 && rand < ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3)
-        wildMonIndex = 3;
-    else
-        wildMonIndex = 4;
 
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
+    static const u8 sRockThresholds[] = {
+    #if defined(ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0)
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1)
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2)
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3)
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_4)
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_4,
+    #endif
+    // …lägg till fler #if-block om du ökar slots…
+    };
+
+    const u8 count = ARRAY_COUNT(sRockThresholds);
+    u8 wildMonIndex = 0;
+
+    for (u8 i = 0; i < count; i++)
+    {
+        if (rand < sRockThresholds[i]) { wildMonIndex = i; break; }
+    }
+
     if (swap)
-        wildMonIndex = 4 - wildMonIndex;
+        wildMonIndex = (count - 1) - wildMonIndex;
 
     return wildMonIndex;
 }
@@ -278,52 +609,93 @@ u32 ChooseWildMonIndex_Rocks(void)
 // FISH_WILD_COUNT
 static u32 ChooseWildMonIndex_Fishing(u8 rod)
 {
-    u8 wildMonIndex = 0;
+    // Ignorera parametern (tvinga Super Rod-tabellen)
+    (void)rod;
+
     bool8 swap = FALSE;
-    u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
-                             ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_TOTAL);
+    // Slumpa inom Old Rods total (genereras från JSON)
+    u8 rand = Random() % ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL;
 
     if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
+        
 
-    switch (rod)
-    {
-    case OLD_ROD:
-        if (rand < ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0)
-            wildMonIndex = 0;
-        else
-            wildMonIndex = 1;
+// Villkorlig initializer: tar bara med de SLOT-makron som FINNS.
+    // Sätt ett "rimligt max" (ex. 64) så du kan öka framöver utan mer C-kod.
+    static const u8 sOldRodThresholds[] = {
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_2)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_2,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_3)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_3,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_4)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_4,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_5)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_5,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_6)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_6,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_7)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_7,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_8)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_8,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_9)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_9,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_10)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_10,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_11)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_11,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_12)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_12,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_13)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_13,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_14)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_14,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_15)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_15,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_16)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_16,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_17)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_17,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_18)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_18,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_19)
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_19,
+    #endif
+    // ... fortsätt upp till en övre gräns du är bekväm med ...
+    };
 
-        if (swap)
-            wildMonIndex = 1 - wildMonIndex;
-        break;
-    case GOOD_ROD:
-        if (rand < ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2)
-            wildMonIndex = 2;
-        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2 && rand < ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3)
-            wildMonIndex = 3;
-        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3 && rand < ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4)
-            wildMonIndex = 4;
+    const u8 count = ARRAY_COUNT(sOldRodThresholds);
+    u8 wildMonIndex = 0;
 
-        if (swap)
-            wildMonIndex = 6 - wildMonIndex;
-        break;
-    case SUPER_ROD:
-        if (rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5)
-            wildMonIndex = 5;
-        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6)
-            wildMonIndex = 6;
-        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7)
-            wildMonIndex = 7;
-        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8)
-            wildMonIndex = 8;
-        if (rand >= ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8 && rand < ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9)
-            wildMonIndex = 9;
-
-        if (swap)
-            wildMonIndex = 14 - wildMonIndex;
-        break;
+    for (u8 i = 0; i < count; i++) {
+        if (rand < sOldRodThresholds[i]) { wildMonIndex = i; break; }
     }
+
+    if (swap)
+        wildMonIndex = (count - 1) - wildMonIndex;
+
     return wildMonIndex;
 }
 
@@ -968,6 +1340,7 @@ void FishingWildEncounter(u8 rod)
     u16 species;
     u32 headerId;
     enum TimeOfDay timeOfDay;
+    rod=OLD_ROD;
 
     gIsFishingEncounter = TRUE;
     if (CheckFeebas() == TRUE)
