@@ -48,17 +48,17 @@ static u32 CalculateFishingTimeOfDayBoost(void);
 #define FISHING_GEN3_STICKY_CHANCE 85  //Active if config I_FISHING_STICKY_BOOST is set to GEN_3 or lower
 
 #if I_FISHING_BITE_ODDS >= GEN_4
-    #define FISHING_OLD_ROD_ODDS 25
-    #define FISHING_GOOD_ROD_ODDS 50
-    #define FISHING_SUPER_ROD_ODDS 75
+    #define FISHING_OLD_ROD_ODDS 100
+    #define FISHING_GOOD_ROD_ODDS 100
+    #define FISHING_SUPER_ROD_ODDS 100
 #elif I_FISHING_BITE_ODDS >= GEN_3
-    #define FISHING_OLD_ROD_ODDS 50
-    #define FISHING_GOOD_ROD_ODDS 50
-    #define FISHING_SUPER_ROD_ODDS 50
+    #define FISHING_OLD_ROD_ODDS 100
+    #define FISHING_GOOD_ROD_ODDS 100
+    #define FISHING_SUPER_ROD_ODDS 100
 #else
     #define FISHING_OLD_ROD_ODDS 100
-    #define FISHING_GOOD_ROD_ODDS 33
-    #define FISHING_SUPER_ROD_ODDS 50
+    #define FISHING_GOOD_ROD_ODDS 100
+    #define FISHING_SUPER_ROD_ODDS 100
 #endif
 
 struct FriendshipHookChanceBoost
@@ -307,9 +307,9 @@ static bool32 Fishing_ChangeMinigame(struct Task *task)
 static bool32 Fishing_WaitForA(struct Task *task)
 {
     const s16 reelTimeouts[3] = {
-        [OLD_ROD]   = 36,
-        [GOOD_ROD]  = 33,
-        [SUPER_ROD] = 30
+        [OLD_ROD]   = 255,
+        [GOOD_ROD]  = 255,
+        [SUPER_ROD] = 255
     };
 
     AlignFishingAnimationFrames();
@@ -335,8 +335,8 @@ static bool32 Fishing_CheckMoreDots(struct Task *task)
     const s16 moreDotsChance[][2] =
     {
         [OLD_ROD]   = {0, 0},
-        [GOOD_ROD]  = {40, 10},
-        [SUPER_ROD] = {70, 30}
+        [GOOD_ROD]  = {0, 0},
+        [SUPER_ROD] = {0, 0}
     };
 
     AlignFishingAnimationFrames();

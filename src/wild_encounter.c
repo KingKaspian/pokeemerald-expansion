@@ -547,6 +547,12 @@ u32 ChooseWildMonIndex_Water(void)
     #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_9)
         ENCOUNTER_CHANCE_WATER_MONS_SLOT_9,
     #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_10)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_10,
+    #endif
+    #if defined(ENCOUNTER_CHANCE_WATER_MONS_SLOT_11)
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_11,
+    #endif
     // …lägg till fler #if-block om du ökar slots i JSON…
     };
 
@@ -658,30 +664,6 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     #endif
     #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_11)
         ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_11,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_12)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_12,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_13)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_13,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_14)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_14,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_15)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_15,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_16)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_16,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_17)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_17,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_18)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_18,
-    #endif
-    #if defined(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_19)
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_19,
     #endif
     // ... fortsätt upp till en övre gräns du är bekväm med ...
     };
