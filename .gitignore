@@ -58,3 +58,5 @@ tools/aif2pcm/aif2pcm
 *.fastSmol
 *.smolTM
 __pycache__
+# Ignore Poryscript Linux binary
+tools/poryscript/poryscript
