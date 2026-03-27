@@ -2419,11 +2419,22 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
+    case SCROLL_MULTI_REGION_SELECT:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;  // 6 syns
+        task->tNumItems = 9;                                   // 9 regioner
+        task->tLeft = 1;                                       // position X
+        task->tTop = 1;                                        // position Y
+        task->tWidth = 10;                                     // bredd i tiles
+        task->tHeight = 12;                                    // höjd (måste vara större än maxItems)
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;
         DestroyTask(taskId);
         break;
     }
+
 }
 
 static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] =
@@ -2579,7 +2590,21 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Underpowered,
         gText_WhenInDanger,
         gText_Exit
-    }
+    },
+
+    [SCROLL_MULTI_REGION_SELECT] =
+    {
+        COMPOUND_STRING("Kanto"),
+        COMPOUND_STRING("Johto"),
+        COMPOUND_STRING("Hoenn"),
+        COMPOUND_STRING("Sinnoh"),
+        COMPOUND_STRING("Unova"),
+        COMPOUND_STRING("Kalos"),
+        COMPOUND_STRING("Alola"),
+        COMPOUND_STRING("Galar"),
+        COMPOUND_STRING("Paldea"),
+    },
+
 };
 
 static void Task_ShowScrollableMultichoice(u8 taskId)

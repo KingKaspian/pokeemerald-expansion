@@ -1,0 +1,418 @@
+mapscripts NewBirchsLab_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION: NewBirchsLab_EventScript_BallDefault
+}
+
+script NewBirchsLab_EventScript_BallDefault
+{
+    setvar(VAR_STARTER_REGION, 0)
+}
+
+script NewBirchsLab_EventScript_Birch
+{
+    // Låt spelaren bara välja region om ingen starter är vald ännu
+    if(!(flag(FLAG_CHOSEN_GRASS_TYPE) || flag(FLAG_CHOSEN_WATER_TYPE) || flag(FLAG_CHOSEN_FIRE_TYPE)))
+    {
+        lock
+        faceplayer
+
+        message("Would you like to switch regions?")
+
+        // Använd scrollable multichoice istället för vanlig multichoice
+        setvar(VAR_0x8004, SCROLL_MULTI_REGION_SELECT)
+        special(ShowScrollableMultichoice)
+        waitstate      // vänta tills spelaren gjort sitt val
+
+        // Här ligger valet i VAR_RESULT:
+        // 0 = Kanto, 1 = Johto, ..., 8 = Paldea
+        if (var(VAR_RESULT) == 0)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 0) // Kanto
+        }
+        elif (var(VAR_RESULT) == 1)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 1) // Johto
+        }
+        elif (var(VAR_RESULT) == 2)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 2) // Hoenn
+        }
+        elif (var(VAR_RESULT) == 3)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 3) // Sinnoh
+        }
+        elif (var(VAR_RESULT) == 4)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 4) // Unova
+        }
+        elif (var(VAR_RESULT) == 5)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 5) // Kalos
+        }
+        elif (var(VAR_RESULT) == 6)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 6) // Alola
+        }
+        elif (var(VAR_RESULT) == 7)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 7) // Galar
+        }
+        elif (var(VAR_RESULT) == 8)
+        {
+            call(StarterFade)
+            setvar(VAR_STARTER_REGION, 8) // Paldea
+        }
+        // Om spelaren trycker B, brukar VAR_RESULT bli MULTI_B_PRESSED.
+        // Du kan kolla på det också om du vill göra något speciellt då.
+
+        msgbox("Choose wisely...")
+        waitmessage
+        release
+        end
+    }
+    else
+    {
+        msgbox("Take care of your Pokémon.", MSGBOX_NPC)
+        end
+    }
+}
+
+script StarterFade
+{
+    fadescreen(FADE_TO_BLACK)
+    delay(20)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script NewBirchsLab_EventScript_GrassStarter
+{
+    lockall
+
+    if (flag(FLAG_CHOSEN_GRASS_TYPE) || flag(FLAG_CHOSEN_WATER_TYPE) || flag(FLAG_CHOSEN_FIRE_TYPE))
+    {
+        msgbox("Don't take another Pokémon.")
+        waitmessage
+        releaseall
+        end
+    }
+
+    // Välj Grass-mon beroende på region
+    switch (var(VAR_STARTER_REGION))
+    {
+    case 0:  // Kanto
+        setvar(VAR_STARTER_SPECIES, SPECIES_BULBASAUR)
+        break
+    case 1:  // Johto
+        setvar(VAR_STARTER_SPECIES, SPECIES_CHIKORITA)
+        break
+    case 2:  // Hoenn
+        setvar(VAR_STARTER_SPECIES, SPECIES_TREECKO)
+        break
+    case 3:  // Sinnoh
+        setvar(VAR_STARTER_SPECIES, SPECIES_TURTWIG)
+        break
+    case 4:  // Unova
+        setvar(VAR_STARTER_SPECIES, SPECIES_SNIVY)
+        break
+    case 5:  // Kalos
+        setvar(VAR_STARTER_SPECIES, SPECIES_CHESPIN)
+        break
+    case 6:  // Alola
+        setvar(VAR_STARTER_SPECIES, SPECIES_ROWLET)
+        break
+    case 7:  // Galar
+        setvar(VAR_STARTER_SPECIES, SPECIES_GROOKEY)
+        break
+    case 8:  // Paldea
+        setvar(VAR_STARTER_SPECIES, SPECIES_SPRIGATITO)
+        break
+    }
+    call(ShowStarterPicBySpecies)
+    call(GiveStarterFromVar)
+    if (var(VAR_RESULT) == YES)   // bara om spelaren faktiskt valde Pokémon
+    {
+        setflag(FLAG_CHOSEN_GRASS_TYPE)
+        removeobject(1)
+    }
+    releaseall
+    end
+}
+
+script NewBirchsLab_EventScript_WaterStarter
+{
+    lockall
+
+    if (flag(FLAG_CHOSEN_GRASS_TYPE) || flag(FLAG_CHOSEN_WATER_TYPE) || flag(FLAG_CHOSEN_FIRE_TYPE))
+    {
+        msgbox("Don't take another Pokémon.")
+        waitmessage
+        releaseall
+        end
+    }
+
+    switch (var(VAR_STARTER_REGION))
+    {
+    case 0:  // Kanto
+        setvar(VAR_STARTER_SPECIES, SPECIES_SQUIRTLE)
+        break
+    case 1:  // Johto
+        setvar(VAR_STARTER_SPECIES, SPECIES_TOTODILE)
+        break
+    case 2:  // Hoenn
+        setvar(VAR_STARTER_SPECIES, SPECIES_MUDKIP)
+        break
+    case 3:  // Sinnoh
+        setvar(VAR_STARTER_SPECIES, SPECIES_PIPLUP)
+        break
+    case 4:  // Unova
+        setvar(VAR_STARTER_SPECIES, SPECIES_OSHAWOTT)
+        break
+    case 5:  // Kalos
+        setvar(VAR_STARTER_SPECIES, SPECIES_FROAKIE)
+        break
+    case 6:  // Alola
+        setvar(VAR_STARTER_SPECIES, SPECIES_POPPLIO)
+        break
+    case 7:  // Galar
+        setvar(VAR_STARTER_SPECIES, SPECIES_SOBBLE)
+        break
+    case 8:  // Paldea
+        setvar(VAR_STARTER_SPECIES, SPECIES_QUAXLY)
+        break
+    }
+    call(ShowStarterPicBySpecies)
+    call(GiveStarterFromVar)
+    if (var(VAR_RESULT) == YES)   // bara om spelaren faktiskt valde Pokémon
+    {
+        setflag(FLAG_CHOSEN_WATER_TYPE)
+        removeobject(2)
+    }
+    releaseall
+    end
+}
+
+script NewBirchsLab_EventScript_FireStarter
+{
+    lockall
+
+    if (flag(FLAG_CHOSEN_GRASS_TYPE) || flag(FLAG_CHOSEN_WATER_TYPE) || flag(FLAG_CHOSEN_FIRE_TYPE))
+    {
+        msgbox("Don't take another Pokémon.")
+        waitmessage
+        releaseall
+        end
+    }
+
+    switch (var(VAR_STARTER_REGION))
+    {
+    case 0:  // Kanto
+        setvar(VAR_STARTER_SPECIES, SPECIES_CHARMANDER)
+        break
+    case 1:  // Johto
+        setvar(VAR_STARTER_SPECIES, SPECIES_CYNDAQUIL)
+        break
+    case 2:  // Hoenn
+        setvar(VAR_STARTER_SPECIES, SPECIES_TORCHIC)
+        break
+    case 3:  // Sinnoh
+        setvar(VAR_STARTER_SPECIES, SPECIES_CHIMCHAR)
+        break
+    case 4:  // Unova
+        setvar(VAR_STARTER_SPECIES, SPECIES_TEPIG)
+        break
+    case 5:  // Kalos
+        setvar(VAR_STARTER_SPECIES, SPECIES_FENNEKIN)
+        break
+    case 6:  // Alola
+        setvar(VAR_STARTER_SPECIES, SPECIES_LITTEN)
+        break
+    case 7:  // Galar
+        setvar(VAR_STARTER_SPECIES, SPECIES_SCORBUNNY)
+        break
+    case 8:  // Paldea
+        setvar(VAR_STARTER_SPECIES, SPECIES_FUECOCO)
+        break
+    }
+    call(ShowStarterPicBySpecies)
+    call(GiveStarterFromVar)
+    if (var(VAR_RESULT) == YES)   // bara om spelaren faktiskt valde Pokémon
+    {
+        setflag(FLAG_CHOSEN_FIRE_TYPE)
+        removeobject(3)
+    }
+    releaseall
+    end
+}
+
+script GiveStarterFromVar
+{
+    msgbox("Do you want to choose this Pokémon?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) != YES)
+    {
+        hidemonpic
+        setvar(VAR_RESULT, 0)
+        return
+    }
+    if (var(VAR_RESULT) == YES)
+    {
+        givemon(VAR_STARTER_SPECIES, 5)
+        
+        if (var(VAR_RESULT) == MON_GIVEN_TO_PARTY)
+        {
+            setflag(FLAG_SYS_POKEMON_GET)
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received a Pokémon!")
+            hidemonpic
+            call(NicknamePartyMon)
+            setvar(VAR_RESULT, YES)
+        }
+        elif (var(VAR_RESULT) == MON_GIVEN_TO_PC)
+        {
+            setflag(FLAG_SYS_POKEMON_GET)
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received a Pokémon! (sent to PC)")
+            hidemonpic
+            call(NicknameBoxMon)
+            setvar(VAR_RESULT, YES)
+        }
+        else
+        {
+            // full party + full boxes
+            msgbox("No more room.")
+            hidemonpic
+            setvar(VAR_RESULT, 0)
+        }
+    }
+    return
+}
+
+script ShowStarterPicBySpecies
+{
+    // Visa rätt bild beroende på VAR_STARTER_SPECIES
+    switch (var(VAR_STARTER_SPECIES))
+    {
+    case SPECIES_BULBASAUR:
+        showmonpic(SPECIES_BULBASAUR, 10, 3)
+        break
+    case SPECIES_CHIKORITA:
+        showmonpic(SPECIES_CHIKORITA, 10, 3)
+        break
+    case SPECIES_TREECKO:
+        showmonpic(SPECIES_TREECKO, 10, 3)
+        break
+    case SPECIES_TURTWIG:
+        showmonpic(SPECIES_TURTWIG, 10, 3)
+        break
+    case SPECIES_SNIVY:
+        showmonpic(SPECIES_SNIVY, 10, 3)
+        break
+    case SPECIES_CHESPIN:
+        showmonpic(SPECIES_CHESPIN, 10, 3)
+        break
+    case SPECIES_ROWLET:
+        showmonpic(SPECIES_ROWLET, 10, 3)
+        break
+    case SPECIES_GROOKEY:
+        showmonpic(SPECIES_GROOKEY, 10, 3)
+        break
+    case SPECIES_SPRIGATITO:
+        showmonpic(SPECIES_SPRIGATITO, 10, 3)
+        break
+    case SPECIES_SQUIRTLE:
+        showmonpic(SPECIES_SQUIRTLE, 10, 3)
+        break
+    case SPECIES_TOTODILE:
+        showmonpic(SPECIES_TOTODILE, 10, 3)
+        break
+    case SPECIES_MUDKIP:
+        showmonpic(SPECIES_MUDKIP, 10, 3)
+        break
+    case SPECIES_PIPLUP:
+        showmonpic(SPECIES_PIPLUP, 10, 3)
+        break
+    case SPECIES_OSHAWOTT:
+        showmonpic(SPECIES_OSHAWOTT, 10, 3)
+        break
+    case SPECIES_FROAKIE:
+        showmonpic(SPECIES_FROAKIE, 10, 3)
+        break
+    case SPECIES_POPPLIO:
+        showmonpic(SPECIES_POPPLIO, 10, 3)
+        break
+    case SPECIES_SOBBLE:
+        showmonpic(SPECIES_SOBBLE, 10, 3)
+        break
+    case SPECIES_QUAXLY:
+        showmonpic(SPECIES_QUAXLY, 10, 3)
+        break
+    case SPECIES_CHARMANDER:
+        showmonpic(SPECIES_CHARMANDER, 10, 3)
+        break
+    case SPECIES_CYNDAQUIL:
+        showmonpic(SPECIES_CYNDAQUIL, 10, 3)
+        break
+    case SPECIES_TORCHIC:
+        showmonpic(SPECIES_TORCHIC, 10, 3)
+        break
+    case SPECIES_CHIMCHAR:
+        showmonpic(SPECIES_CHIMCHAR, 10, 3)
+        break
+    case SPECIES_TEPIG:
+        showmonpic(SPECIES_TEPIG, 10, 3)
+        break
+    case SPECIES_FENNEKIN:
+        showmonpic(SPECIES_FENNEKIN, 10, 3)
+        break
+    case SPECIES_LITTEN:
+        showmonpic(SPECIES_LITTEN, 10, 3)
+        break
+    case SPECIES_SCORBUNNY:
+        showmonpic(SPECIES_SCORBUNNY, 10, 3)
+        break
+    case SPECIES_FUECOCO:
+        showmonpic(SPECIES_FUECOCO, 10, 3)
+        break
+    default:
+        // Fallback: välj t.ex. Bulbasaur-bild
+        showmonpic(SPECIES_BULBASAUR, 10, 3)
+        break
+    }
+    return
+}
+
+
+script NicknamePartyMon
+{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES)
+    {
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+    return
+}
+
+script NicknameBoxMon
+{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES)
+    {
+        call(Common_EventScript_NameReceivedBoxMon)
+    }
+    msgbox("Transferred to PC")
+    return
+}
+
+text NewBirchsLab_NotChosen
+{
+    "You did not choose a Pokémon."
+}

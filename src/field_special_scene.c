@@ -86,6 +86,7 @@ static s16 GetTruckBoxYMovement(int time)
 
 #define tTimer data[0]
 
+#if 0 // Truck intro disabled
 static void Task_Truck1(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -276,6 +277,12 @@ void EndTruckSequence(u8 taskId)
         SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_BOTTOM_L, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, BOX2_X_OFFSET, BOX2_Y_OFFSET);
         SetObjectEventSpritePosByLocalIdAndMap(LOCALID_TRUCK_BOX_BOTTOM_R, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, BOX3_X_OFFSET, BOX3_Y_OFFSET);
     }
+}
+#endif // 0
+
+void EndTruckSequence(u8 taskId)
+{
+    // Truck intro disabled – gör ingenting.
 }
 
 bool8 TrySetPortholeWarpDestination(void)

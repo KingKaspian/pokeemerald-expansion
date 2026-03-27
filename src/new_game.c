@@ -48,6 +48,9 @@
 #include "constants/items.h"
 #include "difficulty.h"
 #include "follower_npc.h"
+#include "heal_location.h"
+#include "constants/heal_locations.h"
+
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -56,6 +59,22 @@ static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
 static void ResetItemFlags(void);
 static void ResetDexNav(void);
+
+
+// Sätter första whiteout-respawn till vår nya heal location i Littleroot.
+static void SetInitialWhiteoutRespawnToLittleroot(void)
+{
+    const struct HealLocation *loc = GetHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE);
+    if (loc != NULL)
+    {
+        gSaveBlock1Ptr->lastHealLocation.mapGroup = loc->mapGroup;
+        gSaveBlock1Ptr->lastHealLocation.mapNum   = loc->mapNum;
+        gSaveBlock1Ptr->lastHealLocation.warpId   = WARP_ID_NONE;
+        gSaveBlock1Ptr->lastHealLocation.x        = loc->x;
+        gSaveBlock1Ptr->lastHealLocation.y        = loc->y;
+    }
+}
+
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -131,7 +150,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(MAP_NEW_BIRCHS_LAB), MAP_NUM(MAP_NEW_BIRCHS_LAB), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
 }
 
@@ -198,6 +217,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
+    SetInitialWhiteoutRespawnToLittleroot();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();

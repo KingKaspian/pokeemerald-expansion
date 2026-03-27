@@ -44,9 +44,9 @@
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
 #define FLAG_GOT_OLD_ROD_FROM_PLAYER_ROOM    0x20 // super rod is obtained by pokeball in player's room, so this flag is used to prevent it from being obtained multiple times. Set in src/field/field_specials.c
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_CHOSEN_GRASS_TYPE    0x21 // Flag set when the player chooses the Grass type starter
+#define FLAG_CHOSEN_WATER_TYPE    0x22 // Flag set when the player chooses the Water type starter
+#define FLAG_CHOSEN_FIRE_TYPE    0x23 // Flag set when the player chooses the Fire type starter
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag

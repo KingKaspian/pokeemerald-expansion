@@ -499,6 +499,16 @@ extern const u8 gText_PokemonMoves[];
 extern const u8 gText_Underpowered[];
 extern const u8 gText_WhenInDanger[];
 
+extern const u8 gText_KantoStarter[];
+extern const u8 gText_JohtoStarter[];
+extern const u8 gText_HoennStarter[];
+extern const u8 gText_SinnohStarter[];
+extern const u8 gText_UnovaStarter[];
+extern const u8 gText_KalosStarter[];
+extern const u8 gText_AlolaStarter[];
+extern const u8 gText_GalarStarter[];
+extern const u8 gText_PaldeaStarter[];
+
 // Battle Frontier Maniac
 extern const u8 BattleFrontier_Lounge2_Text_SalonMaidenIsThere[];
 extern const u8 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons[];
